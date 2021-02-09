@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { OpenWeatherMapService } from './services/weatherApi';
 
-function App() {
+const App = () => {
+  let cityWeather: any;
+  const [value, setValue] = useState(''),
+  weatherService = new OpenWeatherMapService(),
+  handleChange = (e:any) => setValue(e.target.value),
+  searchCityWeather = () => { cityWeather = weatherService.getCityWeather(value); }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input type="text" value={value} onChange={handleChange} />
+      <button onClick={searchCityWeather}>Buscar</button>
     </div>
   );
-}
+};
 
 export default App;
