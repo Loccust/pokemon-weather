@@ -1,17 +1,14 @@
+import OpenWeatherMapService from './services/weather.service';
 import React, { useState } from 'react';
-import { OpenWeatherMapService } from './services/weatherApi';
+import { Provider } from 'react-redux';
+import { Store } from './redux/store';
+import Routes from './routes';
 
 const App = () => {
-  let cityWeather: any;
-  const [value, setValue] = useState(''),
-  weatherService = new OpenWeatherMapService(),
-  handleChange = (e:any) => setValue(e.target.value),
-  searchCityWeather = () => { cityWeather = weatherService.getCityWeather(value); }
   return (
-    <div>
-      <input type="text" value={value} onChange={handleChange} />
-      <button onClick={searchCityWeather}>Buscar</button>
-    </div>
+    <Provider store={Store}>
+      <Routes />
+    </Provider>
   );
 };
 
