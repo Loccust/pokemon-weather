@@ -1,0 +1,69 @@
+.display-vertical {
+    flex-direction: column;
+}
+#container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#content-pw {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    height: 60vh;
+}
+
+.wrapper {
+    height: 100%;
+}
+
+.flex-col {
+    display: flex;
+}
+
+.flex-row,
+.styled-card {
+    flex: 1;
+}
+
+.styled-card {
+    margin: 20px 0px;
+}
+
+#weather-card {
+    height: 255px;
+}
+
+#search-card {
+    margin-top: -85px;
+}
+
+#fire{
+    background-color: #FF3838;
+    border: 1px solid #F72F2F;
+}
+
+@media (max-width: 768px) {
+    #content-pw {
+        width: 80vw;
+        height: 85vh;
+    }
+
+    .flex-col {
+        flex: 1;
+    }
+
+    #weather-card {
+        height: 75%;
+    }
+
+    #top-row {
+        flex-direction: column!important;
+    }
+
+    #search-card {
+        margin-top: 10px;
+    }
+}
+
