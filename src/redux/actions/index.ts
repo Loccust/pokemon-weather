@@ -1,6 +1,11 @@
-import { UPDATE_WEATHER } from '../actions/types';
+import { UPDATE_WEATHER, UPDATE_POKEMON } from '../actions/types';
 
 export const setCurrentWeather = (weather: any) => ({
     type: UPDATE_WEATHER,
     newWeather: weather
+  });
+
+  export const setCurrentPokemon = (pokemon: any) => ({
+    type: UPDATE_POKEMON,
+    newPokemon: pokemon
   });

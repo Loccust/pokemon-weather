@@ -1,24 +1,29 @@
 import OpenWeatherMapService from '../../services/weather.service';
 import { setCurrentWeather } from '../../redux/actions';
 import { useToasts } from 'react-toast-notifications'
+import { useHistory } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { useState } from 'react';
 
-const Home = (props: any) => {
+const Location = (props: any) => {
+  let history = useHistory();
   let setCurrentWeather = props.setCurrentWeather,
-    historyWeather: Array<any> = props.historyWeather,
-    cityWeather: any;
-  const { addToast } = useToasts()
-  const [value, setValue] = useState(''),
-    handleChange = (e: any) => setValue(e.target.value),
+  curentWeather: any = props.curentWeather,
+  cityWeather: any;
+  
+  const [city, setCity] = useState('');
+  const { addToast } = useToasts(),
+
+    handleChange = (e: any) => setCity(e.target.value),
+
     searchCityWeather = () => {
-      OpenWeatherMapService.getCityWeather(value).then((response: any) => {
+      OpenWeatherMapService.getCityWeather(city).then((response: any) => {
         console.log(response);
-        if (response.status === 200){
+        if (response.status === 200) {
           cityWeather = response.data;
           setCurrentWeather(cityWeather);
-          console.log(historyWeather);
+          history.push('/pokeweather')
         } else {
           addToast(response.message, { appearance: 'error' })
         }
@@ -27,19 +32,20 @@ const Home = (props: any) => {
         addToast(err.message, { appearance: 'error' })
       });
     }
+
   return (
     <div>
-      <input type="text" value={value} onChange={handleChange} />
+      <input type="text" value={city} onChange={handleChange} />
       <button onClick={searchCityWeather}>Buscar</button>
     </div>
   );
 };
 
 const mapStateToProps = (store: any) => ({
-  historyWeather: store.weatherState.historyWeather
+  curentWeather: store.weatherState.curentWeather
 });
 
 const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators({ setCurrentWeather }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Location);

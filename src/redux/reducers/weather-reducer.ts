@@ -1,24 +1,16 @@
-import { UPDATE_WEATHER } from '../actions/types';
+import { UPDATE_WEATHER } from "../actions/types";
 
 const initialState: any = {
-    historyWeather: [],
+  curentWeather: {},
 };
 export const WeatherReducer = (state = initialState, action: any) => {
-    switch (action.type) {
-        case UPDATE_WEATHER:
-            var currentHistoryWeather = [...state.historyWeather];
-            if (currentHistoryWeather.length > 1) {
-                currentHistoryWeather[0] = currentHistoryWeather[1];
-                currentHistoryWeather[1] = action.newWeather;
-            } else {
-                currentHistoryWeather.push(action.newWeather);
-            }
-            return {
-                ...state,
-                historyWeather: currentHistoryWeather
-            }
-        default:
-            return state;
-
-    }
-}
+  switch (action.type) {
+    case UPDATE_WEATHER:
+      return {
+        ...state,
+        curentWeather: action.newWeather,
+      };
+    default:
+      return state;
+  }
+};
