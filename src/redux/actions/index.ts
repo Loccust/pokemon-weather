@@ -5,7 +5,7 @@ export const setCurrentWeather = (weather: any) => ({
     newWeather: weather
   });
 
-  export const setCurrentPokemon = (pokemon: any) => ({
+  export const sethistoryPokemon = (pokemon: any) => ({
     type: UPDATE_POKEMON,
     newPokemon: pokemon
   });

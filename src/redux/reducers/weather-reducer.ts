@@ -1,14 +1,15 @@
+import { LocationWeatherModel } from './../../model/location-weather-model';
 import { UPDATE_WEATHER } from "../actions/types";
 
 const initialState: any = {
-  curentWeather: {},
+  currentWeather: new LocationWeatherModel(),
 };
 export const WeatherReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case UPDATE_WEATHER:
       return {
         ...state,
-        curentWeather: action.newWeather,
+        currentWeather: action.newWeather,
       };
     default:
       return state;

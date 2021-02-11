@@ -1,5 +1,5 @@
 import PokeApiService from "../../services/pokemon.service";
-import { setCurrentPokemon } from '../../redux/actions';
+import { sethistoryPokemon } from '../../redux/actions';
 import { useToasts } from "react-toast-notifications";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -10,39 +10,27 @@ import { GiFallingRocks, GiGroundSprout } from 'react-icons/gi';
 import { FaStar, FaLeaf, FaBug, FaHotjar, FaTint, FaSnowflake, FaBolt } from 'react-icons/fa';
 import { FiMapPin, FiSearch, FiCloud, FiCloudLightning, FiCloudSnow, FiCloudDrizzle, FiSun, FiArrowLeft } from 'react-icons/fi';
 import './styles.scss';
+import { PokemonModel } from "../../model/pokemon-model";
+import { LocationWeatherModel } from "../../model/location-weather-model";
 
-class Weather {
-  main: string = 'Weather'
-};
-class Main {
-  temp: number = 0;
-}
-class Pokemon {
-  weather: Array<Weather> = new Array<Weather>();
-  main: Main = new Main();
-  name: string = "";
-}
 const PokemonWeather = (props: any) => {
   console.log(props)
   let history = useHistory(),
-    setCurrentPokemon = props.setCurrentPokemon,
-    curentWeather: Pokemon = props.curentWeather,
-    historyPokemon: Array<any> = props.historyPokemon,
+    sethistoryPokemon = props.sethistoryPokemon,
+    currentWeather: LocationWeatherModel = props.currentWeather,
+    historyPokemon: Array<PokemonModel> = props.historyPokemon,
     randomIndex: number = 0,
     pokemons: Array<any> = [];
 
-  const [temp, setTemp] = useState(0);
-  const [weather, setWeather] = useState("");
   const [weatherIcon, setWeatherIcon] = useState(<></>);
   const [pokemonTypeIcon, setPokemonTypeIcon] = useState(<></>);
 
   const [spriteUrl, setSpriteUrl] = useState("");
-  const [pokemon, setPokemon] = useState("");
   const [type, setType] = useState("");
   const { addToast } = useToasts();
 
   useEffect(() => {
-    if (curentWeather.weather)
+    if (currentWeather.weather[0].main != '')
       searchPokemons(getType());
     else
       history.push('/');
@@ -50,10 +38,8 @@ const PokemonWeather = (props: any) => {
 
   const getType = (): string => {
     let type: string = '';
-    setTemp(curentWeather.main.temp - 273.15); //Kelvin => Celsius
-    setWeather(curentWeather.weather[0].main);
-
-    console.log('weather: ' + weather);
+    let temp = (currentWeather.main.temp - 273.15); //Kelvin => Celsius
+    let weather = (currentWeather.weather[0].main);
 
     if (weather === 'Rain')
       type = 'electric';
@@ -90,11 +76,12 @@ const PokemonWeather = (props: any) => {
         if (response.status === 200) {
           pokemons = response.data.pokemon;
           randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
-          setCurrentPokemon(pokemons[randomIndex]);//redx
-          if (historyPokemon[0].name === pokemons[randomIndex].pokemon.name)
+
+          if (historyPokemon[1].pokemon.name === pokemons[randomIndex].name)
             searchPokemons(type);
-          setPokemon(pokemons[randomIndex].pokemon.name);//context
+
           getPokemonImage(pokemons[randomIndex].pokemon.url);
+          sethistoryPokemon(pokemons[randomIndex]);
           getPokemonTypeIcon();
         } else {
           addToast(response.message, { appearance: 'error' })
@@ -106,7 +93,6 @@ const PokemonWeather = (props: any) => {
     },
 
     getPokemonImage = (url: string) => {
-      console.log('type: ' + type)
       PokeApiService.getSprites(url).then(async (response: any) => {
         console.log(response);
         if (response.status === 200) {
@@ -123,7 +109,7 @@ const PokemonWeather = (props: any) => {
 
     getWeatherIcon = () => {
       const size = ".75em"
-      switch (weather) {
+      switch (currentWeather.weather[0].main) {
         case "Clouds":
           setWeatherIcon(<FiCloud size={size} />)
           break;
@@ -180,15 +166,18 @@ const PokemonWeather = (props: any) => {
         {type}
       </Tooltip>
     );
+
   return (
     <Container className="wide" id="container">
-      <div id="content-pw">
+      <Container id="content-pw">
         <Row className="flex-row" id="top-row">
           <Col sm={12} md={6} className="flex-col">
             <Card className="styled-card" id="weather-card">
               <Card.Body>
-                <h4><FiMapPin size=".75em" />  {curentWeather.name}</h4>
-                <h3 className="font-weight-light"> {weatherIcon} {temp.toFixed(2).replace('.', ',')} ºC</h3>
+                <h4><FiMapPin size=".75em" />  {currentWeather.name}</h4>
+                <h3 className="font-weight-light">
+                  {weatherIcon} {(currentWeather.main.temp - 273.15).toFixed(1).replace('.', ',')} ºC
+                </h3>
               </Card.Body>
             </Card>
           </Col>
@@ -197,15 +186,15 @@ const PokemonWeather = (props: any) => {
               <Card.Body className="text-center justify-content-center">
                 <Media className="text-center justify-content-center">
                   <img
-                    width={spriteUrl ? 360 : 180}
-                    height={spriteUrl ? 360 : 180}
+                    width={360}
+                    height={360}
                     className="align-self-center mr-3"
                     src={spriteUrl ? spriteUrl : "http://pngimg.com/uploads/pokeball/pokeball_PNG21.png"}
-                    alt={pokemon}
+                    alt={historyPokemon[0].pokemon.name}
                   />
                 </Media>
                 <div>
-                  <h4 className="font-weight-bold" id="poke-name">{pokemon}</h4>
+                  <h4 className="font-weight-bold" id="poke-name">{historyPokemon[0].pokemon.name}</h4>
                   <OverlayTrigger placement="right" delay={{ show: 250, hide: 400 }} overlay={renderTooltip}>
                     {pokemonTypeIcon}
                   </OverlayTrigger>
@@ -227,17 +216,17 @@ const PokemonWeather = (props: any) => {
             </Button>
           </Col>
         </Row>
-      </div>
+      </Container>
     </Container >
   );
 }
 
 const mapStateToProps = (store: any) => ({
-  curentWeather: store.weatherState.curentWeather,
+  currentWeather: store.weatherState.currentWeather,
   historyPokemon: store.pokemonState.historyPokemon
 });
 
 const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators({ setCurrentPokemon }, dispatch);
+  bindActionCreators({ sethistoryPokemon }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonWeather);

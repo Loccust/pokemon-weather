@@ -7,13 +7,6 @@
     display: flex;
 }
 
-#content-pw {
-    display: flex;
-    flex-direction: column;
-    width: 60vw;
-    height: 60vh;
-}
-
 .wrapper {
     height: 100%;
 }
@@ -22,21 +15,17 @@
     display: flex;
 }
 
-.flex-row,
 .styled-card {
     flex: 1;
-}
-
-.styled-card {
-    margin: 20px 0px;
+    margin: 10px 0px;
 }
 
 #weather-card {
-    height: 255px;
+    height: 235px;
     background-color: #f0f0f0;
     border: 2px solid #e1e1e1;
     .card-body {
-        padding: 20% 10%;
+        padding: 15% 10%;
         flex: 1;
     }
 }
@@ -50,14 +39,14 @@
 }
 
 .pokemon-card {
-    .media{
+    .media {
         min-height: 280px;
-        img{
+        img {
             margin-top: -90px;
         }
     }
     div {
-       margin-top: -15px;
+        margin-top: -15px;
     }
 }
 
@@ -66,13 +55,14 @@
     border: 2px solid #f86b6b;
 }
 
-#water, #ice {
+#water,
+#ice {
     background-color: #dff9fb;
     border: 2px solid #c7ecee;
     color: #79d5d8;
 }
 
-#electric{
+#electric {
     background-color: #f6e58d;
     border: 2px solid #f2d95f;
 }
@@ -82,17 +72,17 @@
     border: 1px solid #a9d22d;
 }
 
-#ground{
+#ground {
     background-color: #dac38b;
     border: 1px solid #ccae62;
 }
 
-#bug{
+#bug {
     background-color: #b881ef;
     border: 1px solid #a55eea;
 }
 
-#rock{
+#rock {
     background-color: #f0f0f0;
     border: 2px solid #e1e1e1;
 }
@@ -109,6 +99,9 @@
 
     #weather-card {
         height: 75%;
+        .card-body {
+            padding: 10% 5% 0;
+        }
     }
 
     #top-row {
@@ -116,18 +109,23 @@
     }
 
     #search-card {
-        margin-top: 10px;
+        margin: -5px 0 15px;
+        padding: 15px;
+        button {
+            padding: 10px;
+        }
+    }
+
+    .styled-card {
+        margin: 0;
     }
 
     .pokemon-card {
-        .media{
-            min-height: 280px;
-            img{
-                margin-top: -60px;
+        margin: 30px 0;
+        .media {
+            img {
+                margin-top: -105px;
             }
-        }
-        div {
-           margin-top: -50px;
         }
     }
 }

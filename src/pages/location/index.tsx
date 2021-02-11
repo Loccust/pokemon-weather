@@ -8,11 +8,12 @@ import { useState } from 'react';
 import { Container, Row, Col, Jumbotron, Form, InputGroup, ButtonGroup, Button, Spinner } from 'react-bootstrap';
 import './styles.scss';
 import { FiMapPin, FiSearch } from 'react-icons/fi';
+import { LocationWeatherModel } from '../../model/location-weather-model';
 
 const Location = (props: any) => {
   let history = useHistory();
   let setCurrentWeather = props.setCurrentWeather,
-    cityWeather: any;
+    cityWeather: LocationWeatherModel = new LocationWeatherModel();
 
   const [validated, setValidated] = useState(false);
   const [city, setCity] = useState('');
@@ -38,9 +39,13 @@ const Location = (props: any) => {
         OpenWeatherMapService.getCityWeather(city).then((response: any) => {
           console.log(response);
           if (response.status === 200) {
-            cityWeather = response.data;
+            cityWeather = {
+              main: response.data.main,
+              weather: response.data.weather,
+              name: response.data.name,
+            };
             setCurrentWeather(cityWeather);
-            history.push('/pokeweather')
+            history.push('/pokeweather');
           } else {
             addToast(response.message, { appearance: 'error' })
           }
@@ -62,7 +67,7 @@ const Location = (props: any) => {
               <ButtonGroup id="btt-group">
                 <InputGroup>
                   <InputGroup.Prepend>
-                    <InputGroup.Text><FiMapPin/></InputGroup.Text>
+                    <InputGroup.Text><FiMapPin /></InputGroup.Text>
                   </InputGroup.Prepend>
                   <Form.Control type="text" placeholder="Digite a cidade" required
                     value={city} onChange={handleInputChange} />
@@ -70,7 +75,7 @@ const Location = (props: any) => {
                     O campo cidade deve ser preenchido!
                   </Form.Control.Feedback>
                 </InputGroup>
-                <Button id="buscar" type="submit" variant="danger"> <FiSearch/> Buscar
+                <Button id="buscar" type="submit" variant="danger"> <FiSearch /> Buscar
                 <Spinner animation="border" role="status" />
                 </Button>
               </ButtonGroup>
@@ -83,7 +88,7 @@ const Location = (props: any) => {
 };
 
 const mapStateToProps = (store: any) => ({
-  curentWeather: store.weatherState.curentWeather
+  currentWeather: store.weatherState.currentWeather
 });
 
 const mapDispatchToProps = (dispatch: any) =>
