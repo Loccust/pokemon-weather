@@ -2,6 +2,9 @@
 ## Encontre o Pokémon equivalente ao clima das cidades de qualquer lugar do mundo.
 
 ![Badge](https://img.shields.io/badge/React-v17.0.1-%61DAFB?style=for-the-badge&logo=react)
+![Badge](https://img.shields.io/badge/Bootstrap-v4.6.0-%7952B3?style=for-the-badge&logo=bootstrap)
+![Badge](https://img.shields.io/badge/Axios-v0.21.1-%854195?style=for-the-badge&logo=axios)
+
 
 ### `yarn test`
 Executa o aplicativo no modo de desenvolvimento.
