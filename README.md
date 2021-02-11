@@ -7,7 +7,8 @@
 ![Badge](https://img.shields.io/badge/Axios-v0.21.1-%854195?style=for-the-badge&logo=axios)
 ![Badge](https://img.shields.io/badge/Redux-v4.0.5-%854195?style=for-the-badge&logo=redux)
 
-### 🛠 Tecnologias
+### Tecnologias
+As seguintes ferramentas foram usadas na construção do projeto:
 - [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 
