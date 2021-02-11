@@ -33,15 +33,68 @@
 
 #weather-card {
     height: 255px;
+    background-color: #f0f0f0;
+    border: 2px solid #e1e1e1;
+    .card-body {
+        padding: 20% 10%;
+        flex: 1;
+    }
+}
+
+#poke-name {
+    text-transform: capitalize;
 }
 
 #search-card {
     margin-top: -85px;
 }
 
-#fire{
-    background-color: #FF3838;
-    border: 1px solid #F72F2F;
+.pokemon-card {
+    .media{
+        min-height: 280px;
+        img{
+            margin-top: -90px;
+        }
+    }
+    div {
+       margin-top: -15px;
+    }
+}
+
+#fire {
+    background-color: #ff7979;
+    border: 2px solid #f86b6b;
+}
+
+#water, #ice {
+    background-color: #dff9fb;
+    border: 2px solid #c7ecee;
+    color: #79d5d8;
+}
+
+#electric{
+    background-color: #f6e58d;
+    border: 2px solid #f2d95f;
+}
+
+#grass {
+    background-color: #badc58;
+    border: 1px solid #a9d22d;
+}
+
+#ground{
+    background-color: #dac38b;
+    border: 1px solid #ccae62;
+}
+
+#bug{
+    background-color: #b881ef;
+    border: 1px solid #a55eea;
+}
+
+#rock{
+    background-color: #f0f0f0;
+    border: 2px solid #e1e1e1;
 }
 
 @media (max-width: 768px) {
@@ -59,11 +112,22 @@
     }
 
     #top-row {
-        flex-direction: column!important;
+        flex-direction: column !important;
     }
 
     #search-card {
         margin-top: 10px;
     }
-}
 
+    .pokemon-card {
+        .media{
+            min-height: 280px;
+            img{
+                margin-top: -60px;
+            }
+        }
+        div {
+           margin-top: -50px;
+        }
+    }
+}

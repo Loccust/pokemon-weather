@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { useState } from 'react';
 import { Container, Row, Col, Jumbotron, Form, InputGroup, ButtonGroup, Button, Spinner } from 'react-bootstrap';
 import './styles.scss';
+import { FiMapPin, FiSearch } from 'react-icons/fi';
 
 const Location = (props: any) => {
   let history = useHistory();
@@ -61,7 +62,7 @@ const Location = (props: any) => {
               <ButtonGroup id="btt-group">
                 <InputGroup>
                   <InputGroup.Prepend>
-                    <InputGroup.Text>@</InputGroup.Text>
+                    <InputGroup.Text><FiMapPin/></InputGroup.Text>
                   </InputGroup.Prepend>
                   <Form.Control type="text" placeholder="Digite a cidade" required
                     value={city} onChange={handleInputChange} />
@@ -69,7 +70,7 @@ const Location = (props: any) => {
                     O campo cidade deve ser preenchido!
                   </Form.Control.Feedback>
                 </InputGroup>
-                <Button id="buscar" type="submit" variant="primary">Buscar
+                <Button id="buscar" type="submit" variant="danger"> <FiSearch/> Buscar
                 <Spinner animation="border" role="status" />
                 </Button>
               </ButtonGroup>
