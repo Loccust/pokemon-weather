@@ -14,6 +14,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [TypeScript](https://www.typescriptlang.org/)
 - [Axios](https://www.npmjs.com/package/axios)
 - [React Bootstrap](https://react-bootstrap.github.io/) / [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/download/)
+- [React Icons](https://react-icons.github.io/react-icons/)
 - [Redux](https://redux.js.org/) / [React Redux](https://react-redux.js.org/)
 - [React Toast Notifications](https://jossmac.github.io/react-toast-notifications/)
 - [Node Sass](https://www.npmjs.com/package/node-sass)
