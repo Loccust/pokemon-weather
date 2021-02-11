@@ -7,8 +7,14 @@
 ![Badge](https://img.shields.io/badge/Axios-v0.21.1-%854195?style=for-the-badge&logo=axios)
 ![Badge](https://img.shields.io/badge/Redux-v4.0.5-%854195?style=for-the-badge&logo=redux)
 
+### 🛠 Tecnologias
+- [React](https://pt-br.reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-### `yarn test`
+### `yarn install`
+Instala as dependências necessárias para a execução do Projeto.
+
+### `yarn start`
 Executa o aplicativo no modo de desenvolvimento.
 Abra http: // localhost: 3000 para visualizá-lo no navegador.
 
