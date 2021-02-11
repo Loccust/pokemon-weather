@@ -28,7 +28,7 @@ const PokemonWeather = (props: any) => {
     pokemons: Array<any> = [];
 
   useEffect(() => {
-    if (curentWeather.weather[0].main)
+    if (curentWeather.weather)
       searchPokemons(getType());
     else
       history.push('/');
@@ -80,10 +80,20 @@ const PokemonWeather = (props: any) => {
         console.log(response);
         if (response.status === 200) {
           pokemons = response.data.pokemon;
-          randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
-          setCurrentPokemon(pokemons[randomIndex]);
-          setPokemon(pokemons[randomIndex].pokemon.name);
-          getPokemonImage(pokemons[randomIndex].pokemon.url);
+          if (historyPokemon.length > 1) {
+            do {
+              randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
+            } while (historyPokemon[0].name === pokemons[randomIndex].pokemon.name)
+            {
+              setCurrentPokemon(pokemons[randomIndex]);//redx
+              setPokemon(pokemons[randomIndex].pokemon.name);//context
+              getPokemonImage(pokemons[randomIndex].pokemon.url);
+            }
+          } else {
+            setCurrentPokemon(pokemons[randomIndex]);//redx
+            setPokemon(pokemons[randomIndex].pokemon.name);//context
+            getPokemonImage(pokemons[randomIndex].pokemon.url);
+          }
         } else {
           addToast(response.message, { appearance: 'error' })
         }
@@ -119,7 +129,7 @@ const PokemonWeather = (props: any) => {
                 <Card.Text>
                   <h5>{curentWeather.name}</h5>
                   <h5>{weather}</h5>
-                  <h3>{temp} ºC</h3>
+                  <h3>{temp.toFixed(2).replace('.', ',')} ºC</h3>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -141,7 +151,7 @@ const PokemonWeather = (props: any) => {
 
         <Row>
           <Col sm={12} md={6} className="flex-col">
-            <Button className="styled-card" id="search-card">
+            <Button className="styled-card" id="search-card" onClick={() => searchPokemons(type)}>
               Buscar
             </Button>
           </Col>
