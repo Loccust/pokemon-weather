@@ -5,8 +5,7 @@
 ![Badge](https://img.shields.io/badge/Sass-v5.0.0-%CC6699?style=for-the-badge&logo=sass)
 ![Badge](https://img.shields.io/badge/Bootstrap-v4.6.0-%7952B3?style=for-the-badge&logo=bootstrap)
 ![Badge](https://img.shields.io/badge/Axios-v0.21.1-%854195?style=for-the-badge&logo=axios)
-![Badge](https://img.shields.io/badge/Redux-v7.1.16-%854195?style=for-the-badge&logo=redux)
-
+![Badge](https://img.shields.io/badge/Redux-v4.0.5-%854195?style=for-the-badge&logo=redux)
 
 
 ### `yarn test`
