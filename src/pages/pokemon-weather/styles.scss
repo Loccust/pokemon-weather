@@ -41,8 +41,14 @@
 .pokemon-card {
     .media {
         min-height: 280px;
-        img {
+        #poke-img {
             margin-top: -90px;
+        }
+        #effect {
+            position: absolute;
+            mix-blend-mode: multiply;
+            filter: saturate(0);
+            opacity: 0.1;
         }
     }
     div {
@@ -123,7 +129,7 @@
     .pokemon-card {
         margin: 30px 0;
         .media {
-            img {
+            #poke-img {
                 margin-top: -105px;
             }
         }

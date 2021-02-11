@@ -14,7 +14,6 @@ import { PokemonModel } from "../../model/pokemon-model";
 import { LocationWeatherModel } from "../../model/location-weather-model";
 
 const PokemonWeather = (props: any) => {
-  console.log(props)
   let history = useHistory(),
     sethistoryPokemon = props.sethistoryPokemon,
     currentWeather: LocationWeatherModel = props.currentWeather,
@@ -28,6 +27,7 @@ const PokemonWeather = (props: any) => {
   const [spriteUrl, setSpriteUrl] = useState("");
   const [type, setType] = useState("");
   const { addToast } = useToasts();
+  const alterImgUrl = "https://lh3.googleusercontent.com/proxy/YbthIgvDuScVam5bESnTQobaHxv1hRDD9q5BMh5qAlver9wgvTcagrmWDhvNZF9DENqfEjrUCiEprt3CXaKSkLiCibtA3ydBwoo_NnJeTAbTO83uIBFSVoMEIcZPTqqb"
 
   useEffect(() => {
     if (currentWeather.weather[0].main != '')
@@ -77,7 +77,7 @@ const PokemonWeather = (props: any) => {
           pokemons = response.data.pokemon;
           randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
 
-          if (historyPokemon[1].pokemon.name === pokemons[randomIndex].name)
+          if (historyPokemon[0].pokemon.name === pokemons[randomIndex].name)
             searchPokemons(type);
 
           getPokemonImage(pokemons[randomIndex].pokemon.url);
@@ -185,13 +185,9 @@ const PokemonWeather = (props: any) => {
             <Card className="styled-card pokemon-card" id={type}>
               <Card.Body className="text-center justify-content-center">
                 <Media className="text-center justify-content-center">
-                  <img
-                    width={360}
-                    height={360}
-                    className="align-self-center mr-3"
-                    src={spriteUrl ? spriteUrl : "http://pngimg.com/uploads/pokeball/pokeball_PNG21.png"}
-                    alt={historyPokemon[0].pokemon.name}
-                  />
+                  <img width={360} height={360}  className="align-self-center mr-3"
+                  src={spriteUrl ? spriteUrl : alterImgUrl} id="poke-img"/>
+                  <img width={440} height={440} id="effect" className="align-self-center mr-3" src={spriteUrl} />
                 </Media>
                 <div>
                   <h4 className="font-weight-bold" id="poke-name">{historyPokemon[0].pokemon.name}</h4>
