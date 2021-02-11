@@ -80,20 +80,15 @@ const PokemonWeather = (props: any) => {
         console.log(response);
         if (response.status === 200) {
           pokemons = response.data.pokemon;
-          if (historyPokemon.length > 1) {
+          if (historyPokemon.length > 1)
             do {
               randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
             } while (historyPokemon[0].name === pokemons[randomIndex].pokemon.name)
-            {
-              setCurrentPokemon(pokemons[randomIndex]);//redx
-              setPokemon(pokemons[randomIndex].pokemon.name);//context
-              getPokemonImage(pokemons[randomIndex].pokemon.url);
-            }
-          } else {
-            setCurrentPokemon(pokemons[randomIndex]);//redx
-            setPokemon(pokemons[randomIndex].pokemon.name);//context
-            getPokemonImage(pokemons[randomIndex].pokemon.url);
-          }
+
+          setCurrentPokemon(pokemons[randomIndex]);//redx
+          setPokemon(pokemons[randomIndex].pokemon.name);//context
+          getPokemonImage(pokemons[randomIndex].pokemon.url);
+
         } else {
           addToast(response.message, { appearance: 'error' })
         }
@@ -142,6 +137,7 @@ const PokemonWeather = (props: any) => {
                   height={240}
                   className="align-self-center mr-3"
                   src={spriteUrl}
+                  alt={pokemon}
                 />
                 <h4>{pokemon}</h4>
               </Card.Body>
