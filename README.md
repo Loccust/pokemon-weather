@@ -1,5 +1,5 @@
 # Pokemon Weather
-## Encontre o Pokémon equivalente ao clima das cidades de qualquer lugar do mundo.
+Encontre o Pokémon equivalente ao clima das cidades de qualquer lugar do mundo.
 
 ![Badge](https://img.shields.io/badge/React-v17.0.1-%61DAFB?style=for-the-badge&logo=react)
 ![Badge](https://img.shields.io/badge/Typescript-v4.1.2-%61DAFB?style=for-the-badge&logo=Typescript)
