@@ -1,10 +1,16 @@
 .display-vertical {
     flex-direction: column;
 }
+
 #container {
     justify-content: center;
     align-items: center;
     display: flex;
+    max-width: 100vw;
+}
+
+#content-pw {
+    max-width: 80%;
 }
 
 .wrapper {
@@ -22,12 +28,15 @@
 }
 
 #weather-card {
-    height: 235px;
+    height: 60%;
     background-color: #f0f0f0;
     border: 2px solid #e1e1e1;
     .card-body {
-        padding: 15% 10%;
         flex: 1;
+        padding: 0% 10%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
     }
 }
 
@@ -42,18 +51,35 @@
 .pokemon-card {
     .media {
         min-height: 280px;
+        img {
+            flex: none;
+        }
         #poke-img {
             margin-top: -90px;
+            z-index: 2;
         }
         #effect {
             position: absolute;
             mix-blend-mode: multiply;
             filter: saturate(0);
             opacity: 0.1;
+            z-index: 1;
         }
     }
-    div {
-        margin-top: -15px;
+    div#description {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        span#type-icon {
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+            background-color: #fff;
+            position: absolute;
+            border-radius: 50%;
+            padding: 10px 13px;
+            margin-top: 40px;
+            flex: none;
+        }
     }
 }
 
@@ -67,31 +93,59 @@
     background-color: #dff9fb;
     border: 2px solid #c7ecee;
     color: #79d5d8;
+    span#type-icon {
+        border: 1px solid #c7ecee;
+    }
 }
 
 #electric {
-    background-color: #f6e58d;
-    border: 2px solid #f2d95f;
+    background-color: #f1c40f;
+    border: 2px solid #ecc00e;
+    span#type-icon {
+        color: #ecc00e;
+        border: 1px solid #ecc00e;
+    }
 }
 
 #grass {
     background-color: #badc58;
-    border: 1px solid #a9d22d;
+    border: 2px solid #a9d22d;
+    span#type-icon {
+        color: #a9d22d;
+        border: 1px solid #a9d22d;
+    }
 }
 
 #ground {
     background-color: #dac38b;
-    border: 1px solid #ccae62;
+    border: 2px solid #ccae62;
+    span#type-icon {
+        color: #ccae62;
+        border: 1px solid #ccae62;
+    }
 }
 
 #bug {
-    background-color: #b881ef;
-    border: 1px solid #a55eea;
+    background-color: #8d65b5;
+    border: 2px solid #a55eea;
+    span#type-icon {
+        color: #a55eea;
+        border: 1px solid #a55eea;
+    }
 }
 
 #rock {
-    background-color: #f0f0f0;
-    border: 2px solid #e1e1e1;
+    background-color: #cacaca;
+    border: 2px solid #b9b9b9;
+    span#type-icon {
+        border: 1px solid #b9b9b9;
+    }
+}
+
+@media (max-width: 1280px) {
+    .pokemon-card .media img {
+        flex: none;
+    }
 }
 
 @media (max-width: 768px) {

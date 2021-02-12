@@ -15,7 +15,9 @@ const Location = (props: any) => {
   let setCurrentWeather = props.setCurrentWeather,
     cityWeather: LocationWeatherModel = new LocationWeatherModel();
 
+
   const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [city, setCity] = useState('');
   const { addToast } = useToasts(),
 
@@ -36,9 +38,10 @@ const Location = (props: any) => {
     searchCityWeather = () => {
       console.log(validated);
       if (!validated) {
+        setLoading(true);
         OpenWeatherMapService.getCityWeather(city).then((response: any) => {
-          console.log(response);
           if (response.status === 200) {
+            setLoading(false);
             cityWeather = {
               main: response.data.main,
               weather: response.data.weather,
@@ -47,11 +50,13 @@ const Location = (props: any) => {
             setCurrentWeather(cityWeather);
             history.push('/pokeweather');
           } else {
-            addToast(response.message, { appearance: 'error' })
+            setLoading(false);
+            addToast(response.message, { appearance: 'error', autoDismiss: true })
           }
         }).catch((err: any) => {
+          setLoading(false);
           console.error("ops! ocorreu um erro " + err);
-          addToast(err.message, { appearance: 'error' })
+          addToast(err.message, { appearance: 'error', autoDismiss: true })
         });
       }
     }
@@ -75,8 +80,11 @@ const Location = (props: any) => {
                     O campo cidade deve ser preenchido!
                   </Form.Control.Feedback>
                 </InputGroup>
-                <Button id="buscar" type="submit" variant="danger"> <FiSearch /> Buscar
-                <Spinner animation="border" role="status" />
+                <Button id="buscar" type="submit" variant="danger" disabled={loading}>
+                  {loading ?
+                    <Spinner as="span" animation="border" role="status" size="sm" />
+                    : <FiSearch />
+                  } Buscar
                 </Button>
               </ButtonGroup>
             </Form>
