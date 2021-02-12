@@ -80,11 +80,9 @@ const PokemonWeather = (props: any) => {
         if (response.status === 200) {
           setLoading(false);
           pokemons = response.data.pokemon;
-          randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
-
-          if (historyPokemon[0].pokemon.name === pokemons[randomIndex].name)
-            searchPokemons(type);
-
+          do{
+            randomIndex = await getRandomArbitrary(0, pokemons.length - 1);
+          } while(historyPokemon[0].pokemon.name === pokemons[randomIndex].name)
           getPokemonImage(pokemons[randomIndex].pokemon.url);
           sethistoryPokemon(pokemons[randomIndex]);
         } else {
